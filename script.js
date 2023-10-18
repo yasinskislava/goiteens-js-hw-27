@@ -1,3 +1,42 @@
+const gallery = document.querySelector(".gallery");
+const images = document.querySelectorAll(".image");
+let galleryOn = false;
+let index;
+
+function toggleImage() {
+    images[index].parentElement.classList.toggle("full-image-container");
+    images[index].classList.toggle("full-image");
+}
+for (let i = 0; i < images.length; i++) {
+    images[i].addEventListener("click", (e) => {
+        e.currentTarget.parentElement.classList.toggle("full-image-container");
+        e.currentTarget.classList.toggle("full-image");
+        galleryOn = true;
+        index = i;
+    });
+}
+window.addEventListener("keydown", (e) => {
+    if (galleryOn === true) {
+        if (e.code === "Escape") {
+            toggleImage();
+            galleryOn = false;
+        }
+        if (e.code === "ArrowLeft") {
+            toggleImage();
+            index--;
+            index = index < 0 ? 0 : index;
+            toggleImage();
+        }
+        if (e.code === "ArrowRight") {
+            toggleImage();
+            index++;
+            index = index > images.length-1 ? images.length-1 : index;
+            toggleImage();
+        }
+    }
+});
+
+//////////////////////////////////////////////////////////////////////
 const createElBtn = document.querySelector('[data-action="render"]');
 const deleteElBtn = document.querySelector('[data-action="destroy"]');
 const number = document.querySelector("input");
@@ -5,9 +44,11 @@ const boxes = document.querySelector("#boxes");
 
 createElBtn.addEventListener("click", () => {
     createBoxes(number.value);
+    number.value = "";
 });
 deleteElBtn.addEventListener("click", () => {
     deleteBoxes(number.value);
+    number.value = "";
 });
 
 let size = 30;

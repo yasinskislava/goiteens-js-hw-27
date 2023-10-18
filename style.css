@@ -5,6 +5,7 @@
 
 
 .image {
+    pointer-events: all;
     width: 300px;
     height: 200px;
     object-fit: cover;
@@ -14,7 +15,7 @@
 
 
 .full-image-container {
-    display: none;
+    display: block;
     position: fixed;
     top: 0;
     left: 0;
@@ -26,6 +27,7 @@
 
 
 .full-image {
+    pointer-events: none;
     max-width: 90%;
     max-height: 90%;
     margin: auto;
